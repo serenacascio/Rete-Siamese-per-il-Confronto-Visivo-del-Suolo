@@ -4,7 +4,7 @@ L’obiettivo principale è stato verificare la capacità della rete di distingu
 
 
 # Struttura
-LUCAS_Text_All_10032025.csv     # File del dataset con le informazioni utili per la rete
+LUCAS_Text_All_10032025.csv     # File del dataset con le informazioni utili per la rete.
 
 coppie_siamese.csv              # Coppie generate (non filtrate)
 
