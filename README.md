@@ -5,19 +5,29 @@ L’obiettivo principale è stato verificare la capacità della rete di distingu
 
 # Struttura
 LUCAS_Text_All_10032025.csv     # File del dataset con le informazioni utili per la rete
+
 coppie_siamese.csv              # Coppie generate (non filtrate)
+
 coppie_siamese_filtrate.csv     # Coppie pulite e pronte al training
 
+
 genera_coppie_siamese.m         # Script per generare coppie dal dataset
+
 pulizia_coppie_lucas.m          # Script di pre-pulizia coppie
+
 resize.m                        # Resize immagini 
+
 scarica_immagini_lucas.m        # Download immagini dataset LUCAS
+
 siamese_train_lucas.m           # Training principale della rete Siamese
 
 snet_lucas_final.mat            # Modello addestrato
 
+
 dataset_lucas_usda/             # Dataset originale
+
 dataset_lucas_usda_resized/     # Dataset preprocessato (resize immagini)
+
 lucas_images/                   # Immagini scaricate
 
 
