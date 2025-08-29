@@ -4,54 +4,54 @@ L’obiettivo principale è stato verificare la capacità della rete di distingu
 
 
 # Struttura
-*LUCAS_Text_All_10032025.csv     # File del dataset con le informazioni utili per la rete.
+* LUCAS_Text_All_10032025.csv     # File del dataset con le informazioni utili per la rete.
 
-*coppie_siamese.csv              # Coppie generate (non filtrate)
+* coppie_siamese.csv              # Coppie generate (non filtrate)
 
-*coppie_siamese_filtrate.csv     # Coppie pulite e pronte al training
+* coppie_siamese_filtrate.csv     # Coppie pulite e pronte al training
 
-*genera_coppie_siamese.m         # Script per generare coppie dal dataset
+* genera_coppie_siamese.m         # Script per generare coppie dal dataset
 
-*pulizia_coppie_lucas.m          # Script di pre-pulizia coppie
+* pulizia_coppie_lucas.m          # Script di pre-pulizia coppie
 
-*resize.m                        # Resize immagini 
+* resize.m                        # Resize immagini 
 
-*scarica_immagini_lucas.m        # Download immagini dataset LUCAS
+* scarica_immagini_lucas.m        # Download immagini dataset LUCAS
 
-*siamese_train_lucas.m           # Training principale della rete Siamese
+* siamese_train_lucas.m           # Training principale della rete Siamese
 
-*snet_lucas_final.mat            # Modello addestrato
+* snet_lucas_final.mat            # Modello addestrato
 
-*dataset_lucas_usda/             # Dataset originale
+* dataset_lucas_usda/             # Dataset originale
 
-*dataset_lucas_usda_resized/     # Dataset preprocessato (resize immagini)
+* dataset_lucas_usda_resized/     # Dataset preprocessato (resize immagini)
 
-*lucas_images/                   # Immagini scaricate
+* lucas_images/                   # Immagini scaricate
 
 
 # Timeline del progetto
 
 1) Acquisizione e organizzazione dati
 
-*scarica_immagini_lucas.m
+* scarica_immagini_lucas.m
 
 scaricare automaticamente le foto LUCAS dal server EC, con selezione per Paese/anno e gestione del codice PointID + lettera (C,E,N,P,S,W).
 
-*organizza_per_usda.m
+* organizza_per_usda.m
 
 riorganizzare le immagini per classe USDA (es. loam, siltLoam, …) a partire da un CSV con mappatura POINTID -> CLASSE.
 
-*resize.m
+* resize.m
 
 uniformare le dimensioni delle immagini per il training (300×300).
 
 2) Generazione e pulizia coppie
 
-*genera_coppie_siamese.m
+* genera_coppie_siamese.m
 
 produrre un set di coppie positive (stessa classe) e negative (classi diverse) per la rete Siamese.
 
-*pulizia_coppie_lucas.m
+* pulizia_coppie_lucas.m
 
 pre-pulizia delle coppie per velocizzare l’addestramento e ridurre errori in run.
 
@@ -59,7 +59,7 @@ Controlli: esistenza file, leggibilità, dimensioni corrette, immagini non corro
 
 3) Addestramento
 
-*siamese_train_lucas.m
+* siamese_train_lucas.m
 
 training della rete Siamese.
 
@@ -77,5 +77,5 @@ Output: snet_lucas_final.mat.
 
 .....
 
-*snet_lucas_final.mat – primo modello addestrato.
+* snet_lucas_final.mat – primo modello addestrato.
 
