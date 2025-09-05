@@ -30,3 +30,4 @@ filtrato = data(validRows, :);
 fprintf('Coppie valide trovate: %d su %d\n', height(filtrato), n);
 writetable(filtrato, outputFile);
 fprintf('File salvato: %s\n', outputFile);
+
