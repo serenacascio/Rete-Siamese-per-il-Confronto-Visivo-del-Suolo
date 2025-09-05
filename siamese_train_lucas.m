@@ -115,11 +115,14 @@ function [X1, X2, Y] = preprocessMiniBatch(X1cell, X2cell, Yvec, imageSize)
     Y = dlarray(reshape(single(Yvec), 1, 1, 1, []), 'SSCB');
 end
 
+ %funzione model loss modificata per ovviare ai NAN e INF che venivano
+ %restituiti
 function [loss, gradients] = modelLoss(net, X1, X2, Y)
     Z1 = forward(net, X1);   % dlarray, dimensione [64 1 1 B] o [64 B]
     Z2 = forward(net, X2);
 
-    % Rende esplicitamente vettoriali gli embedding per ogni elemento del batch
+    % Rende esplicitamente vettoriali gli embedding per ogni elemento del
+    % batch
     Z1 = reshape(Z1, [], size(Z1, ndims(Z1))); % [64, B]
     Z2 = reshape(Z2, [], size(Z2, ndims(Z2))); % [64, B]
 
