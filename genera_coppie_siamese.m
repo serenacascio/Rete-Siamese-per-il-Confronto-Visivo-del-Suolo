@@ -56,3 +56,6 @@ T = table(pairs(:,1), pairs(:,2), labels', 'VariableNames', {'image1', 'image2',
 writetable(T, outputCSV);
 
 fprintf('\nFile "%s" creato con %d coppie (simili + dissimili)\n', outputCSV, height(T));
+
+fprintf('\nFile "%s" creato con %d coppie (simili + dissimili)\n', outputCSV, height(T));
+
