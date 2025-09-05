@@ -54,3 +54,6 @@ for i = 1:numel(imgFiles)
 end
 
 fprintf('\nV %d immagini spostate in "%s"\n', spostate, outputFolder);
+
+
+
