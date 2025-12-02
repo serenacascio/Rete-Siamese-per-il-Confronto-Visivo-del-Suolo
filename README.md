@@ -147,16 +147,6 @@ Il modello finale è salvato in:
 
 */checkpoints/snet_siamese.ckpt*
 
-ed è successivamente utilizzabile per:
-
-- estrarre embedding
-
-- fare classificazione via k-NN
-
-- costruire una gallery di riferimento
-
-- valutare immagini di test tramite nearest neighbor o centroidi
-
 
 ### 3\) __Valutazione e risultati__
 
