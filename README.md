@@ -4,9 +4,7 @@ Vogliamo sviluppare e addestrare una rete neurale Siamese per il
 riconoscimento e il confronto di immagini di suolo.
 
 L'obiettivo principale è stato verificare la capacità della rete di
-distinguere tra immagini simili e diverse, partendo dal dataset LUCAS
-Topsoil
-
+distinguere tra immagini simili e diverse
 
 ## File
 
