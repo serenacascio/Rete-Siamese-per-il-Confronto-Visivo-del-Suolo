@@ -10,12 +10,11 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from tqdm import tqdm
 
-# Importa le classi dal tuo script di training
-from siamese_train_lucas_emotions import FeatureExtractor, SiameseNetwork, ContrastiveLoss
+from trainsiamese import FeatureExtractor, SiameseNetwork
 
-# ----------------------------------------------------------------------
+
 # CONFIGURAZIONE
-# ----------------------------------------------------------------------
+
 CARTELLA_TRAIN = r"Dataset\Gallery"      # cartella con le classi per costruire galleria/centroidi
 CARTELLA_TEST  = r"Dataset\Test" # cartella con immagini di test (non viste dal training)
 dimensione_immagine = (224, 224)
@@ -45,15 +44,14 @@ trasformazione = T.Compose([
     T.Normalize(mean=[0.5,0.5,0.5], std=[0.5,0.5,0.5])
 ])
 
-# ----------------------------------------------------------------------
+
 # FEATURE EXTRACTOR (DEVE MATCHARE IL MODELLO USATO IN TRAIN)
-# ----------------------------------------------------------------------
 # Qui usiamo l'embedding_net salvato all'interno del LightningModule
 feature_net = FeatureExtractor()
 
-# ----------------------------------------------------------------------
+
 # CARICAMENTO MODELLO LIGHTNING
-# ----------------------------------------------------------------------
+# qu abbiamo un errore ma il test funziona comunque bene
 model = SiameseNetwork.load_from_checkpoint(FILE_MODELLO)
 
 model.eval()
@@ -61,9 +59,9 @@ feature_net = model.embedding_net.to(DEVICE)
 
 print("Modello caricato correttamente.")
 
-# ----------------------------------------------------------------------
+
 # FUNZIONI DI SUPPORTO
-# ----------------------------------------------------------------------
+
 def compute_embedding(percorso_file, rete):
     """Calcola embedding normalizzato per una singola immagine."""
     img = Image.open(percorso_file).convert("RGB")
@@ -103,26 +101,26 @@ def predici_knn(v, galleria, K=7):
     vicini = [galleria[i]["classe"] for i in idx]
     return max(set(vicini), key=vicini.count)
 
-# ----------------------------------------------------------------------
+
 # CARICAMENTO CLASSI
-# ----------------------------------------------------------------------
+
 classi_selezionate = sorted([
     d for d in os.listdir(CARTELLA_TRAIN)
     if os.path.isdir(os.path.join(CARTELLA_TRAIN, d))
 ])
 print("Classi trovate:", classi_selezionate)
 
-# ----------------------------------------------------------------------
+
 # COSTRUZIONE GALLERIA E CENTROIDI
-# ----------------------------------------------------------------------
+
 print("\nCostruzione galleria...")
 galleria = costruisci_galleria(CARTELLA_TRAIN, classi_selezionate, feature_net)
 centroidi = costruisci_centroidi(galleria, classi_selezionate)
 print(f"Galleria costruita con {len(galleria)} embedding totali.\n")
 
-# ----------------------------------------------------------------------
+
 # COSTRUZIONE TEST SET
-# ----------------------------------------------------------------------
+
 test_files = []
 for cls in classi_selezionate:
     path = os.path.join(CARTELLA_TEST, cls)
@@ -135,9 +133,9 @@ for cls in classi_selezionate:
 NUM_TEST = min(NUM_TEST, len(test_files))
 test_set = random.sample(test_files, NUM_TEST)
 
-# ----------------------------------------------------------------------
+
 # CICLO DI TEST
-# ----------------------------------------------------------------------
+
 true_labels = []
 pred_centroid = []
 pred_knn = []
@@ -160,9 +158,9 @@ for t in tqdm(test_set, ncols=80):
 
 test_time = time.time() - start_time
 
-# ----------------------------------------------------------------------
+
 # RISULTATI FINALI
-# ----------------------------------------------------------------------
+
 acc_centroid = np.mean([t == p for t, p in zip(true_labels, pred_centroid)]) * 100
 acc_knn = np.mean([t == p for t, p in zip(true_labels, pred_knn)]) * 100
 
@@ -173,9 +171,9 @@ print(f"Tempo medio per immagine: {test_time/NUM_TEST:.3f} sec")
 print(f"Accuratezza Centroidi: {acc_centroid:.2f}%")
 print(f"Accuratezza k-NN (K={K}): {acc_knn:.2f}%\n")
 
-# ----------------------------------------------------------------------
+
 # MATRICE DI CONFUSIONE
-# ----------------------------------------------------------------------
+
 true_cat = np.array(true_labels)
 centroid_cat = np.array(pred_centroid)
 knn_cat = np.array(pred_knn)
