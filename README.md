@@ -21,7 +21,7 @@ distinguere tra immagini simili e diverse
 
 ## Timeline e struttura del progetto
 
-### 1\) __Ricerca del dataset e adattamento alla mia rete__
+### 1\) __Ricerca del dataset__
 
 ricerca di un Dataset che potesse adattarsi bene al mio progetto
 utilizzando dapprima dei dataset generici sulle texture e poi il dataset
@@ -41,7 +41,7 @@ Trovato il dataset in uso ho poi creato tre cartelle con le immagini:
 
 
     
-### 2\) __Addestramento__
+### 2\) __Creazione e training della rete __
 
 *trainsiamese.py*
 
