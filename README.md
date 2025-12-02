@@ -24,7 +24,7 @@ distinguere tra immagini simili e diverse
 ### 1\) __Ricerca del dataset e adattamento alla mia rete__
 
 ricerca di un Dataset che potesse adattarsi bene al mio progetto
-utilizzando dapprima dei dataset generici sulle texture e poi un dataset
+utilizzando dapprima dei dataset generici sulle texture e poi il dataset
 scelto
 
 Trovato il dataset in uso ho poi creato tre cartelle con le immagini:
@@ -43,7 +43,7 @@ Trovato il dataset in uso ho poi creato tre cartelle con le immagini:
     
 ### 2\) __Addestramento__
 
-* trainsiamese.py
+*trainsiamese.py*
 
 training della rete Siamese.
 
@@ -145,7 +145,7 @@ generazione continua di coppie sempre nuove
 
 Il modello finale è salvato in:
 
-/checkpoints/snet_siamese.ckpt
+*/checkpoints/snet_siamese.ckpt*
 
 ed è successivamente utilizzabile per:
 
@@ -160,7 +160,7 @@ valutare immagini di test tramite nearest neighbor o centroidi
 
 ### 3\) __Valutazione e risultati__
 
-* test.py
+*test.py*
 
 Lo script di test carica un modello Siamese addestrato e lo utilizza per
 confrontare un'immagine di query con una galleria di immagini,
