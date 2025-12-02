@@ -63,13 +63,13 @@ struttura:
 
 Un Dataset che genera automaticamente coppie di immagini:
 
-coppie positive: due immagini appartenenti alla stessa classe (label:0)
+\- coppie positive: due immagini appartenenti alla stessa classe (label:0)
 
-coppie negative: due immagini di classi diverse (label:1)
+\- coppie negative: due immagini di classi diverse (label:1)
 
 Le coppie vengono generate in modo casuale ad ogni epoca
 
-Output: snet_siamese-v4.ckpt
+Output: *snet_siamese-v4.ckpt*
 
 
 #### 2\. Feature Extractor (CNN)
@@ -81,13 +81,13 @@ riconoscere pattern locali (tipico delle texture)
 
 La rete contiene:
 
-\- 3 blocchi Convolution + BatchNorm + ReLU + MaxPool
+- 3 blocchi Convolution + BatchNorm + ReLU + MaxPool
 
-\- Flatten
+- Flatten
 
-\- 2 Fully Connected layers
+- 2 Fully Connected layers
 
-\- normalizzazione L2 degli embedding
+- normalizzazione L2 degli embedding
 
 Il vettore finale a 64 dimensioni è utilizzato per confrontare immagini
 tramite distanza euclidea.
@@ -114,13 +114,13 @@ Questa loss avvicina le immagini simili e allontana quelle diverse.
 
 La classe SiameseNetwork è un modulo PyTorch Lightning che gestisce:
 
-forward pass
+- forward pass
 
-computazione della loss
+- computazione della loss
 
-logging automatico
+- logging automatico
 
-configurazione dell'ottimizzatore
+- configurazione dell'ottimizzatore
 
 Il modello supporta ottimizzatori flessibili tramite:
 
@@ -135,13 +135,13 @@ variabilità come texture e immagini da campo.
 
 L'addestramento è gestito tramite Trainer, con:
 
-checkpoint automatico del modello migliore
+- checkpoint automatico del modello migliore
 
-logging della loss
+- logging della loss
 
-supporto CPU
+- supporto CPU
 
-generazione continua di coppie sempre nuove
+- generazione continua di coppie sempre nuove
 
 Il modello finale è salvato in:
 
@@ -149,13 +149,13 @@ Il modello finale è salvato in:
 
 ed è successivamente utilizzabile per:
 
-estrarre embedding
+- estrarre embedding
 
-fare classificazione via k-NN
+- fare classificazione via k-NN
 
-costruire una gallery di riferimento
+- costruire una gallery di riferimento
 
-valutare immagini di test tramite nearest neighbor o centroidi
+- valutare immagini di test tramite nearest neighbor o centroidi
 
 
 ### 3\) __Valutazione e risultati__
