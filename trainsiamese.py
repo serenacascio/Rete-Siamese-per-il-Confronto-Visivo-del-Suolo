@@ -133,7 +133,7 @@ class FeatureExtractor(nn.Module):
             self.flatten_dim = self.conv(dummy).view(1, -1).size(1)
 
         self.fc = nn.Sequential(
-            nn.Flatten(), #Serve sapere quante unità arrivano al Linear.
+            nn.Flatten(), #da tensore a vettore.
             nn.Linear(self.flatten_dim, 256), #in_features = canali_finali * altezza * larghezza
             nn.BatchNorm1d(256),
             nn.ReLU(),
