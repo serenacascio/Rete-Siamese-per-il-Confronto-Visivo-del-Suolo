@@ -8,10 +8,6 @@ Include:
 """
 
 #  TRAINING SIAMESE NETWORK 
-#  Versione per tesi triennale - codice chiaro e commentato
-#  - Eliminato uso GPU
-#  - Aggiunta training loop con Lightning
-#  - Contrastive Loss "classica" con margin
 
 import os
 import time
