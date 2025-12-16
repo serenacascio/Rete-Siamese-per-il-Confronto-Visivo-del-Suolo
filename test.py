@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from tqdm import tqdm
 
-from trainsiamese import FeatureExtractor, SiameseNetwork
+# Importa le classi dal tuo script di training
+from trainsiamese import FeatureExtractor, SiameseNetwork, ContrastiveLoss
 
 
 # CONFIGURAZIONE
@@ -19,9 +20,9 @@ CARTELLA_TRAIN = r"Dataset\Gallery"      # cartella con le classi per costruire 
 CARTELLA_TEST  = r"Dataset\Test" # cartella con immagini di test (non viste dal training)
 dimensione_immagine = (224, 224)
 FILE_MODELLO = r"checkpoints/snet_siamese-v4.ckpt"
-NUM_TEST = 50 
+NUM_TEST = 50
 K = 7
-DEVICE = "cpu"  # usa "cuda" se vuoi GPU
+DEVICE = "cpu"  
 
 ESTENSIONI_IMG = (".jpg", ".jpeg", ".png")
 
@@ -30,10 +31,10 @@ LEARNING_RATE = 1e-3
 MARGINE = 2.0
 
 #   ottimizzazione
-OPTIMIZER_CLS = torch.optim.Adam  # classe di ottimizzazione (SGD, Adam, AdamW, RMSprop...)
+OPTIMIZER_CLS = torch.optim.Adam  # classe di ottimizzazione 
 OPTIMIZER_KWARGS = {
-    # "momentum": 0.9, # per SGD
-    "weight_decay": 1e-4,   # SGD, Adam, AdamW, RMSprop...
+    # "momentum": 0.9, # per SGD quindi non usato qui
+    "weight_decay": 1e-4,   
     "betas": (0.9, 0.999),  # valori di default di Adam
     "eps": 1e-8              # valore di stabilità numerica
 }
@@ -46,13 +47,20 @@ trasformazione = T.Compose([
 
 
 # FEATURE EXTRACTOR (DEVE MATCHARE IL MODELLO USATO IN TRAIN)
+
 # Qui usiamo l'embedding_net salvato all'interno del LightningModule
 feature_net = FeatureExtractor()
 
 
 # CARICAMENTO MODELLO LIGHTNING
-# qu abbiamo un errore ma il test funziona comunque bene
-model = SiameseNetwork.load_from_checkpoint(FILE_MODELLO)
+
+# Usa load_from_checkpoint di Lightning: gestisce correttamente classi custom
+#da errore ma funziona lo stesso
+model = SiameseNetwork.load_from_checkpoint(
+    checkpoint_path=FILE_MODELLO,
+    embedding_net=FeatureExtractor(),   # ricrea il feature extractor
+    loss_fn=ContrastiveLoss()           # ricrea la loss (se necessario)
+)
 
 model.eval()
 feature_net = model.embedding_net.to(DEVICE)
